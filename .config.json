@@ -1,0 +1,31 @@
+{
+    "PASSWORD": {
+        "MAX_LENGTH": "8"
+    },
+    "STORAGE": {
+        "TYPE": "Mysqli",
+        "MYSQLI": {
+            "HOST": "localhost",
+            "USER": "root",
+            "PASSWORD": "",
+            "DATABASE": "kp"
+        }
+    },
+    "LOGGER": {
+        "TYPE": "File",
+        "FILE": {
+            "DESTINATION": "solid.log"
+        }
+    },
+    "MAILER": {
+        "SENDER": "adm@kupujemprodajem.com",
+        "SIGNUP": {
+            "SUBJECT": "Dobro dosli",
+            "MESSAGE": "Dobro dosli na nas sajt. Potrebno je samo da potvrdite email adresu ..."
+        }
+    },
+    "MAXMIND": {
+        "USER": "kp",
+        "PASSWORD": "kp"
+    }
+}
