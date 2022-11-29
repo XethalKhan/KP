@@ -2,7 +2,7 @@
 
 namespace KP\SOLID\Adapter;
 
-include 'Common\index.php';
+require_once 'Common/index.php';
 
-include 'Core\User\index.php';
-include 'Page\User\index.php';
+require_once 'Core/User/index.php';
+require_once 'Page/User/index.php';

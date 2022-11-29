@@ -7,10 +7,10 @@ use KP\SOLID\Infra\App\DefaultServiceContainerBuilder;
 use KP\SOLID\Infra\App\HttpXmlApiRequestActionLoader;
 use KP\SOLID\Infra\View\Xml\XmlViewFactory;
 
-include 'src\Domain\index.php';
-include 'src\UseCase\index.php';
-include 'src\Adapter\index.php';
-include 'src\Infra\index.php';
+require_once 'src/Domain/index.php';
+require_once 'src/UseCase/index.php';
+require_once 'src/Adapter/index.php';
+require_once 'src/Infra/index.php';
 
 $serviceContainerBuilder = new DefaultServiceContainerBuilder();
 $actionLoader = new HttpXmlApiRequestActionLoader();

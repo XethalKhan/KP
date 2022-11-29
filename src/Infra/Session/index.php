@@ -2,5 +2,5 @@
 
 namespace KP\SOLID\Infra\Session;
 
-include 'DefaultSession.php';
+require_once 'DefaultSession.php';
 

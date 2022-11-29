@@ -2,7 +2,7 @@
 
 namespace KP\SOLID\UseCase\Page;
 
-include 'SignUpPageUseCaseInput.php';
-include 'SignUpPageUseCaseOutput.php';
-include 'SignUpPageUseCase.php';
-include 'UserPageUseCaseInteractor.php';
+require_once 'SignUpPageUseCaseInput.php';
+require_once 'SignUpPageUseCaseOutput.php';
+require_once 'SignUpPageUseCase.php';
+require_once 'UserPageUseCaseInteractor.php';

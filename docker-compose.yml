@@ -1,0 +1,28 @@
+version: '3'
+services:
+  php-httpd:
+      image: php:7.3-apache
+      ports:
+          - 80:80
+      volumes:
+          - ".:/var/www/html"
+      command: >
+        bash -c "a2enmod rewrite
+        && docker-php-ext-install mysqli
+        && docker-php-ext-enable mysqli
+        && apache2-foreground"
+  mariadb:
+    image: mariadb:10.5.2
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./init.sql:/data/application/init.sql
+        - mariadb-volume:/var/lib/mysql
+    environment:
+        TZ: "Europe/Belgrade"
+        MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+        MYSQL_ROOT_PASSWORD: "rootpwd"
+        MYSQL_USER: 'solid'
+        MYSQL_PASSWORD: 'solid'
+        MYSQL_DATABASE: 'kp'
+volumes:
+    mariadb-volume:

@@ -2,4 +2,4 @@
 
 namespace KP\SOLID\Infra\Mailer;
 
-include 'DummyMailer.php';
+require_once 'DummyMailer.php';

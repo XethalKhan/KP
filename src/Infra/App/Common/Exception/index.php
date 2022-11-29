@@ -2,5 +2,5 @@
 
 namespace KP\SOLID\Infra\App;
 
-include 'ActionLoaderException.php';
-include 'HttpActionLoaderException.php';
+require_once 'ActionLoaderException.php';
+require_once 'HttpActionLoaderException.php';

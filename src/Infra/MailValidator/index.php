@@ -2,4 +2,4 @@
 
 namespace KP\SOLID\Infra\MailValidator;
 
-include 'DummyMailValidator.php';
+require_once 'DummyMailValidator.php';

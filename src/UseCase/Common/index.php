@@ -2,13 +2,13 @@
 
 namespace KP\SOLID\UseCase;
 
-include 'Exception\index.php';
-include 'Interface\index.php';
+require_once 'Exception/index.php';
+require_once 'Interface/index.php';
 
-include 'BaseUseCaseInput.php';
-include 'BaseUseCaseOutput.php';
-include 'BaseUseCase.php';
-include 'BaseUseCaseInteractor.php';
-include 'BaseQuery.php';
-include 'BaseQueryResult.php';
-include 'BaseCommand.php';
+require_once 'BaseUseCaseInput.php';
+require_once 'BaseUseCaseOutput.php';
+require_once 'BaseUseCase.php';
+require_once 'BaseUseCaseInteractor.php';
+require_once 'BaseQuery.php';
+require_once 'BaseQueryResult.php';
+require_once 'BaseCommand.php';

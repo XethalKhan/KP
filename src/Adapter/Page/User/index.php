@@ -2,7 +2,7 @@
 
 namespace KP\SOLID\Adapter\Page;
 
-include 'SignUpPageAction.php';
-include 'SignUpPageViewModel.php';
-include 'UserPageController.php';
-include 'UserPagePresenter.php';
+require_once 'SignUpPageAction.php';
+require_once 'SignUpPageViewModel.php';
+require_once 'UserPageController.php';
+require_once 'UserPagePresenter.php';

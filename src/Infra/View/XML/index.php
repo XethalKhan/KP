@@ -2,10 +2,10 @@
 
 namespace KP\SOLID\Infra\View\Json;
 
-include 'BaseXmlView.php';
-include 'ExceptionXmlView.php';
+require_once 'BaseXmlView.php';
+require_once 'ExceptionXmlView.php';
 
-include 'SignUpErrorXmlView.php';
-include 'SignUpSuccessXmlView.php';
+require_once 'SignUpErrorXmlView.php';
+require_once 'SignUpSuccessXmlView.php';
 
-include 'XmlViewFactory.php';
+require_once 'XmlViewFactory.php';

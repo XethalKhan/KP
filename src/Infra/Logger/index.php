@@ -2,4 +2,4 @@
 
 namespace KP\SOLID\Infra\Logger;
 
-include 'FileLogger.php';
+require_once 'FileLogger.php';

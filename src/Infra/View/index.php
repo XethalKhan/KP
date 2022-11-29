@@ -2,7 +2,7 @@
 
 namespace KP\SOLID\Infra\View;
 
-include 'Common/index.php';
-include 'Json/index.php';
-include 'Xml/index.php';
-include 'Page/index.php';
+require_once 'Common/index.php';
+require_once 'Json/index.php';
+require_once 'Xml/index.php';
+require_once 'Page/index.php';

@@ -2,7 +2,7 @@
 
 namespace KP\SOLID\UseCase;
 
-include 'Common\index.php';
+require_once 'Common/index.php';
 
-include 'Core\index.php';
-include 'Page\index.php';
+require_once 'Core/index.php';
+require_once 'Page/index.php';

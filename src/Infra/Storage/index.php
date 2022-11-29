@@ -2,5 +2,5 @@
 
 namespace KP\SOLID\Infra\Storage;
 
-include 'Mysqli/index.php';
-include 'Dummy/index.php';
+require_once 'Mysqli/index.php';
+require_once 'Dummy/index.php';

@@ -2,12 +2,12 @@
 
 namespace KP\SOLID\Infra\App;
 
-include 'Common\index.php';
+require_once 'Common/index.php';
 
-include 'ExecutionContext.php';
+require_once 'ExecutionContext.php';
 
-include 'App.php';
+require_once 'App.php';
 
-include 'HttpJsonApiRequestActionLoader.php';
-include 'HttpXmlApiRequestActionLoader.php';
-include 'HttpHtmlRequestActionLoader.php';
+require_once 'HttpJsonApiRequestActionLoader.php';
+require_once 'HttpXmlApiRequestActionLoader.php';
+require_once 'HttpHtmlRequestActionLoader.php';

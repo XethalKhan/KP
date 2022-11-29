@@ -2,9 +2,9 @@
 
 namespace KP\SOLID\Adapter;
 
-include 'BaseViewModel.php';
-include 'BaseAction.php';
-include 'BaseController.php';
-include 'BasePresenter.php';
-include 'EmptyAction.php';
-include 'ExceptionViewModel.php';
+require_once 'BaseViewModel.php';
+require_once 'BaseAction.php';
+require_once 'BaseController.php';
+require_once 'BasePresenter.php';
+require_once 'EmptyAction.php';
+require_once 'ExceptionViewModel.php';

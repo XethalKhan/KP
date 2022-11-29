@@ -2,13 +2,13 @@
 
 namespace KP\SOLID\Infra\App;
 
-include 'Exception/index.php';
+require_once 'Exception/index.php';
 
-include 'BaseActionLoader.php';
-include 'BaseServiceContainer.php';
-include 'BaseServiceContainerBuilder.php';
+require_once 'BaseActionLoader.php';
+require_once 'BaseServiceContainer.php';
+require_once 'BaseServiceContainerBuilder.php';
 
-include 'DefaultServiceContainer.php';
-include 'DefaultServiceContainerBuilder.php';
+require_once 'DefaultServiceContainer.php';
+require_once 'DefaultServiceContainerBuilder.php';
 
-include 'PageServiceContainerBuilder.php';
+require_once 'PageServiceContainerBuilder.php';

@@ -2,11 +2,11 @@
 
 namespace KP\SOLID\Infra;
 
-include 'Logger/index.php';
-include 'Configuration/index.php';
-include 'Storage/index.php';
-include 'Mailer/index.php';
-include 'View/index.php';
-include 'Session/index.php';
-include 'Mailvalidator/index.php';
-include 'App/index.php';
+require_once 'Logger/index.php';
+require_once 'Configuration/index.php';
+require_once 'Storage/index.php';
+require_once 'Mailer/index.php';
+require_once 'View/index.php';
+require_once 'Session/index.php';
+require_once 'Mailvalidator/index.php';
+require_once 'App/index.php';

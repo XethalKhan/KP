@@ -2,6 +2,6 @@
 
 namespace KP\SOLID\Infra\Storage\Dummy;
 
-include 'BaseDummyRepository.php';
-include 'UserDummyRepository.php';
-include 'DummyRepositoryFactory.php';
+require_once 'BaseDummyRepository.php';
+require_once 'UserDummyRepository.php';
+require_once 'DummyRepositoryFactory.php';

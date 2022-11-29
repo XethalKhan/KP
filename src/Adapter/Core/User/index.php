@@ -2,10 +2,9 @@
 
 namespace KP\SOLID\Adapter;
 
-include 'SignUpAction.php';
-include 'UserController.php';
+require_once 'SignUpAction.php';
+require_once 'UserController.php';
 
-include 'SignUpErrorViewModel.php';
-include 'SignUpPageViewModel.php';
-include 'SignUpSuccessViewModel.php';
-include 'UserPresenter.php';
+require_once 'SignUpErrorViewModel.php';
+require_once 'SignUpSuccessViewModel.php';
+require_once 'UserPresenter.php';

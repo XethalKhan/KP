@@ -5,9 +5,9 @@
     "STORAGE": {
         "TYPE": "Mysqli",
         "MYSQLI": {
-            "HOST": "localhost",
-            "USER": "root",
-            "PASSWORD": "",
+            "HOST": "mariadb",
+            "USER": "solid",
+            "PASSWORD": "solid",
             "DATABASE": "kp"
         }
     },

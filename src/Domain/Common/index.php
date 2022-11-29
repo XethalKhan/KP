@@ -2,5 +2,5 @@
 
 namespace KP\SOLID\Domain;
 
-include 'BaseEntity.php';
-include 'BasePredicate.php';
+require_once 'BaseEntity.php';
+require_once 'BasePredicate.php';

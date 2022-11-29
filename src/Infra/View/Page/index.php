@@ -2,11 +2,11 @@
 
 namespace KP\SOLID\Infra\View\Page;
 
-include 'BasePageView.php';
-include 'ExceptionPageView.php';
+require_once 'BasePageView.php';
+require_once 'ExceptionPageView.php';
 
-include 'SignUpPageView.php';
-include 'SignUpErrorPageView.php';
-include 'SignUpSuccessPageView.php';
+require_once 'SignUpPageView.php';
+require_once 'SignUpErrorPageView.php';
+require_once 'SignUpSuccessPageView.php';
 
-include 'PageViewFactory.php';
+require_once 'PageViewFactory.php';

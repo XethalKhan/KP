@@ -2,5 +2,5 @@
 
 namespace KP\SOLID\Infra\View;
 
-include 'BaseView.php';
-include 'IViewFactory.php';
+require_once 'BaseView.php';
+require_once 'IViewFactory.php';

@@ -2,4 +2,4 @@
 
 namespace KP\SOLID\UseCase\Page;
 
-include 'User\index.php';
+require_once 'User/index.php';

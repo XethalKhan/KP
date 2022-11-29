@@ -2,8 +2,8 @@
 
 namespace KP\SOLID\Domain;
 
-include 'Common/index.php';
+require_once 'Common/index.php';
 
-include 'UserEntity.php';
-include 'ValidatePasswordFormatPredicate.php';
-include 'ValidateEmailFormatPredicate.php';
+require_once 'UserEntity.php';
+require_once 'ValidatePasswordFormatPredicate.php';
+require_once 'ValidateEmailFormatPredicate.php';
