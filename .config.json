@@ -1,6 +1,6 @@
 {
     "PASSWORD": {
-        "MAX_LENGTH": "8"
+        "MIN_LENGTH": "8"
     },
     "STORAGE": {
         "TYPE": "Mysqli",

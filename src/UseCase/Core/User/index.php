@@ -2,6 +2,8 @@
 
 namespace KP\SOLID\UseCase\Core;
 
+include 'SignUpUseCaseErrorConsts.php';
+
 include 'SignUpUseCaseInput.php';
 include 'SignUpUseCaseOutput.php';
 include 'SignUpUseCase.php';

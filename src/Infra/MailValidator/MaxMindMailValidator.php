@@ -29,8 +29,8 @@ class MaxMindMailValidator implements IMailValidator{
         curl_setopt($curlHandle, CURLOPT_HEADER, false);
         curl_setopt($curlHandle, CURLOPT_HTTPHEADER, [
             'Content-Type' => 'application/json',
+            'Authorization: Basic '. base64_encode($this->username . ':' . $this->password)
         ]);
-        curl_setopt($curlHandle, CURLOPT_USERPWD, $this->user . ":" . $this->password);  
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_POST, true);
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, json_encode(["address" => $email, "domain" => $emailSplitAtMonkeyCharacter[1]]));

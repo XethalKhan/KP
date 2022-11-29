@@ -21,7 +21,7 @@ class SignUpPageView extends BasePageView {
         $body .= "<form action=\"sign-up\" method=\"POST\">";
         $body .= "<div class=\"mb-3 mt-3\">";
         $body .= "<label for=\"email\">Email:</label>";
-        $body .= "<input type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Enter email\" name=\"email\">";
+        $body .= "<input type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Enter email\" name=\"email\">";
         $body .= "</div>";
         $body .= "<div class=\"mb-3\">";
         $body .= "<label for=\"password\">Password:</label>";

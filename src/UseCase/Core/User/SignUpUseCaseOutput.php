@@ -7,66 +7,57 @@ use KP\SOLID\UseCase\BaseUseCaseOutput;
 class SignUpUseCaseOutput extends BaseUseCaseOutput {
 
     private $email;
+    private $id;
+    private $success;
 
-    private $emptyEmail;
-    private $emailInvalid;
-    private $passwordMismatch;
-    private $passwordInvalid;
-    private $passwordRepeatInvalid;
-    private $userAlreadyExist;
-
-    public function __construct(string $email, bool $emptyEmail, bool $emailInvalid, bool $emailBlacklisted, bool $passwordMismatch, bool $passwordInvalid, bool $passwordRepeatInvalid, bool $userAlreadyExist){
+    public function __construct(string $email, int $id, int $success){
         $this->email = $email;
-        $this->emptyEmail = $emptyEmail;
-        $this->emailInvalid = $emailInvalid;
-        $this->emailBlacklisted = $emailBlacklisted;
-        $this->passwordMismatch = $passwordMismatch;
-        $this->passwordInvalid = $passwordInvalid;
-        $this->passwordRepeatInvalid = $passwordRepeatInvalid;
-        $this->userAlreadyExist = $userAlreadyExist;
+        $this->id = $id;
+        $this->success = $success;
     }
 
     public function getEmail() : string {
         return $this->email;
     }
 
+    public function getID() : string {
+        return $this->id;
+    }
+
     public function isEmptyEmail() : bool {
-        return $this->emptyEmail;
+        return $this->success & SIGN_UP_USE_CASE_ERROR_EMPTY_EMAIL;
     }
 
     public function isEmailInvalid() : bool {
-        return $this->emailInvalid;
+        return $this->success & SIGN_UP_USE_CASE_ERROR_INVALID_EMAIL_FORMAT;
     }
 
     public function isEmailBlacklisted() : bool {
-        return $this->emailBlacklisted;
+        return $this->success & SIGN_UP_USE_CASE_ERROR_BLACKLISTED_EMAIL;
     }
 
     public function isPasswordMismatch() : bool {
-        return $this->passwordMismatch;
+        return $this->success & SIGN_UP_USE_CASE_ERROR_PASSWORD_MISMATCH;
     }
 
     public function isPasswordInvalid() : bool {
-        return $this->passwordInvalid;
+        return $this->success & SIGN_UP_USE_CASE_ERROR_INVALID_PASSWORD;
     }
 
     public function isPasswordRepeatInvalid() : bool {
-        return $this->passwordRepeatInvalid;
+        return $this->success & SIGN_UP_USE_CASE_ERROR_INVALID_PASSWORD_REPEAT;
     }
 
     public function doesUserAlreadyExist() : bool {
-        return $this->userAlreadyExist;
+        return $this->success & SIGN_UP_USE_CASE_ERROR_USER_EXISTS;
+    }
+
+    public function storageError() : bool {
+        return $this->success & SIGN_UP_USE_CASE_STORAGE_ERROR;
     }
 
     public function getSuccess() : bool {
-        return 
-            !$this->emptyEmail
-            && !$this->emailInvalid
-            && !$this->emailBlacklisted
-            && !$this->passwordMismatch
-            && !$this->passwordInvalid
-            && !$this->passwordRepeatInvalid
-            && !$this->userAlreadyExist;
+        return $this->success == SIGN_UP_USE_CASE_NO_ERRORS;
     }
 
 }

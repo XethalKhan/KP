@@ -18,11 +18,11 @@ class BaseController{
     }
 
     public function execute(BaseAction $action) : void {
-        $this->logger->debug("Action {$action} sent to controller " . get_class($this));
+        $this->logger->debug("Action {$action} sent to controller {${__CLASS__}}");
 
         $useCaseInput = $this->useCaseInputFactoryMethod($action);
 
-        $this->logger->debug("Use case input created in " . get_class($this) . " use case input factory from action {$action} is {$useCaseInput}");
+        $this->logger->debug("Use case input created in {${__CLASS__}} use case input factory from action {$action} is {$useCaseInput}");
         
         $this->inputGateway->send($useCaseInput);
     }

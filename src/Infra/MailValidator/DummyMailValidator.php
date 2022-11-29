@@ -19,7 +19,7 @@ class DummyMailValidator implements IMailValidator{
     {
         $emailSplitAtMonkeyCharacter = explode("@", $email);
         $authentication = base64_encode($this->configuration->get("MAXMIND.USER") . ":" . $this->configuration->get("MAXMIND.PASSWORD"));
-        $this->logger->debug("DummyMailValidator->validate() call. Performs validation for email {$email}. Endpoint = https://minfraud.maxmind.com/minfraud/v2.0/score/email/address, method = POST, header Content-Type = application/json, header Authentication: Bearer {$authentication}, body = {\"address\": \"{$email}\", \"domain\": \"{$emailSplitAtMonkeyCharacter[1]}\"}");
+        $this->logger->debug("DummyMailValidator->validate() call. Performs validation for email {$email}. Endpoint = https://minfraud.maxmind.com/minfraud/v2.0/score/email/address, method = POST, header Content-Type = application/json, header Authentication: Basic {$authentication}, body = {\"address\": \"{$email}\", \"domain\": \"{$emailSplitAtMonkeyCharacter[1]}\"}");
         return true;
     }
 }

@@ -9,4 +9,5 @@ include 'ExecutionContext.php';
 include 'App.php';
 
 include 'HttpJsonApiRequestActionLoader.php';
+include 'HttpXmlApiRequestActionLoader.php';
 include 'HttpHtmlRequestActionLoader.php';

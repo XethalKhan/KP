@@ -1,11 +1,11 @@
 <?php
 
-namespace KP\SOLID\Infra\View\Json;
+namespace KP\SOLID\Infra\View\Xml;
 
 use KP\SOLID\Adapter\BaseViewModel;
 use KP\SOLID\Adapter\Core\SignUpSuccessViewModel;
 
-class SignUpSuccessJsonView extends BaseJsonView{
+class SignUpSuccessXmlView extends BaseXmlView{
 
     public function __construct(BaseViewModel $viewModel){
         parent::__construct($viewModel);
@@ -18,6 +18,6 @@ class SignUpSuccessJsonView extends BaseJsonView{
 
         parent::display();
         
-        echo "{\"success\": true, \"userId\": \"" . $this->viewModel->getID() . "\"}";
+        echo "<success>true</success><userId>" . $this->viewModel->getID() . "</userId>";
     }
 }

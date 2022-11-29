@@ -21,37 +21,38 @@ class UserPagePresenter extends UserPresenter {
         }
 
         if($input instanceof SignUpUseCaseOutput && !($input->getSuccess())){
-            $message = "";
-
-            if($input->isEmptyEmail()){
-                $message .= "Email must not be empty<br/>";
-            }
+            $emailError = "";
+            $passwordError = "";
 
             if($input->isEmailInvalid()){
-                $message .= "Email is not in valid format<br/>";
+                $emailError = "Email is not in valid format<br/>";
+            }
+
+            if($input->isEmptyEmail()){
+                $emailError = "Email must not be empty<br/>";
             }
 
             if($input->isEmailBlacklisted()){
-                $message .= "Email is blacklisted<br/>";
-            }
-
-            if($input->isPasswordMismatch()){
-                $message .= "Passwords do not match<br/>";
+                $emailError = "Email is blacklisted<br/>";
             }
 
             if($input->doesUserAlreadyExist()){
-                $message .= "User with specified email already exists<br/>";
+                $emailError = "User with specified email already exists<br/>";
+            }
+
+            if($input->isPasswordMismatch()){
+                $passwordError .= "Passwords do not match<br/>";
             }
 
             if($input->isPasswordInvalid()){
-                $message .= "Password does not satisfy requirements<br/>";
+                $passwordError .= "Password does not satisfy requirements<br/>";
             }
 
             if($input->isPasswordRepeatInvalid()){
-                $message .= "Repeated password does not satisfy requirements<br/>";
+                $passwordError .= "Repeated password does not satisfy requirements<br/>";
             }
 
-            return new SignUpErrorViewModel($input->getEmail(), $message);
+            return new SignUpErrorViewModel($input->getEmail(), $emailError . $passwordError);
         }
 
         return parent::viewModelFactoryMethod($input);

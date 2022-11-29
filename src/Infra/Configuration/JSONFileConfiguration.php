@@ -2,21 +2,14 @@
 
 namespace KP\SOLID\Infra\Configuration;
 
-use KP\SOLID\UseCase\IConfiguration;
-
-class JSONFileConfiguration implements IConfiguration {
-
-    private $file;
-    private $configurationMap;
+class JSONFileConfiguration extends BaseFileConfiguration {
 
     function __construct($file = './.config.json')
     {
-        $this->file = $file;
-        $this->configurationMap = array();
-        $this->load();
+        parent::__construct($file);
     }
 
-    private function load() : void {
+    protected function load() : void {
         $fileHandle = fopen($this->file, 'r');
         flock($fileHandle, LOCK_EX);
         $content = fread($fileHandle, filesize($this->file));
@@ -38,12 +31,5 @@ class JSONFileConfiguration implements IConfiguration {
         }
     }
 
-    public function get($parameter) : string {
-        return $this->has($parameter) ? $this->configurationMap[$parameter] : "";
-    }
-
-    public function has($parameter) : bool {
-        return $this->configurationMap[$parameter] != NULL;
-    }
 
 }

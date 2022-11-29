@@ -15,34 +15,42 @@ class UserPresenter extends BasePresenter {
 
     public function viewModelFactoryMethod(BaseUseCaseOutput $input) : BaseViewModel {
         if($input instanceof SignUpUseCaseOutput && $input->getSuccess()){
-            return new SignUpSuccessViewModel($input->getEmail());
+            return new SignUpSuccessViewModel($input->getEmail(), $input->getID());
         }
 
         if($input instanceof SignUpUseCaseOutput && !($input->getSuccess())){
             $message = "error";
 
-            if($input->isEmptyEmail()){
-                $message = "email";
+            if($input->storageError()){
+                $message = "DB_error";
             }
 
-            if($input->isEmailInvalid()){
-                $message = "email_format";
-            }
-
-            if($input->isEmailBlacklisted()){
-                $message = "email_blacklist";
-            }
-
-            if($input->isPasswordMismatch() || $input->doesUserAlreadyExist()){
+            if($input->doesUserAlreadyExist()){
                 $message = "password_mismatch";
+            }
+
+            if($input->isPasswordMismatch()){
+                $message = "password_mismatch";
+            }
+
+            if($input->isPasswordRepeatInvalid()){
+                $message = "password2";
             }
 
             if($input->isPasswordInvalid()){
                 $message = "password";
             }
 
-            if($input->isPasswordRepeatInvalid()){
-                $message = "password2";
+            if($input->isEmailInvalid()){
+                $message = "email_format";
+            }
+
+            if($input->isEmptyEmail()){
+                $message = "email";
+            }
+
+            if($input->isEmailBlacklisted()){
+                $message = "email_blacklist";
             }
 
             return new SignUpErrorViewModel($input->getEmail(), $message);

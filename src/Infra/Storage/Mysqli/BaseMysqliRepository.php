@@ -10,11 +10,11 @@ use KP\SOLID\UseCase\IRepository;
 abstract class BaseMysqliRepository implements IRepository {
 
     protected $table;
-    private $host;
+    protected $host;
+    protected $database;
+    protected $port;
     private $user;
     private $password;
-    private $database;
-    private $port;
 
     public function __construct(string $table, string $host, string $user, string $password, string $database, int $port = 3306){
         $this->table = $table;
@@ -43,7 +43,7 @@ abstract class BaseMysqliRepository implements IRepository {
         $connection = new mysqli($this->host, $this->user, $this->password, $this->database, $this->port);
 
         if ($connection->connect_errno) {
-            throw new RuntimeException('mysqli connection error: ' . $connection->connect_error);
+            throw new MysqliStorageException($this->host, $this->port, $this->database, $this, "Connection creation failed. " . $connection->error, $connection->errno);
         }
 
         return $connection;

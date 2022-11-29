@@ -2,7 +2,7 @@
 
 namespace KP\SOLID\Infra\App;
 
-use KP\SOLID\Infra\Configuration\JSONFileConfiguration;
+use KP\SOLID\Infra\Configuration\EnvFileConfiguration;
 use KP\SOLID\Infra\Logger\FileLogger;
 use KP\SOLID\Infra\Mailer\DummyMailer;
 use KP\SOLID\Infra\MailValidator\DummyMailValidator;
@@ -16,7 +16,7 @@ class DefaultServiceContainerBuilder extends BaseServiceContainerBuilder {
     protected $executionContextMapping;
 
     protected function buildConfiguration(){
-        return new JSONFileConfiguration();
+        return new EnvFileConfiguration();
     }
 
     protected function buildLogger(IConfiguration $configuration){

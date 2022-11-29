@@ -22,7 +22,7 @@ class CreateUserCommand extends BaseCommand {
             if($postedTimestamp === false){
                 throw new InvalidArgumentException(__CLASS__ . " posted parameter format must be supported by strtotime");
             }
-            $this->posted = date('Y-m-d h:i:s', $postedTimestamp);
+            $this->posted = date('Y-m-d H:i:s', $postedTimestamp);
         }
     }
 

@@ -20,7 +20,7 @@ class UserQuery extends BaseQuery {
             if($postedGreaterThanTimestamp === false){
                 throw new InvalidArgumentException(__CLASS__ . " posted parameter format must be supported by strtotime");
             }
-            $this->postedGreaterThan = date('Y-m-d h:i:s', $postedGreaterThanTimestamp);
+            $this->postedGreaterThan = date('Y-m-d H:i:s', $postedGreaterThanTimestamp);
         }
     }
 

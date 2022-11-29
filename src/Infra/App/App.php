@@ -4,7 +4,10 @@ namespace KP\SOLID\Infra\App;
 
 use Exception;
 use KP\SOLID\Adapter\ExceptionViewModel;
+use KP\SOLID\Infra\Logger\FileLogger;
 use KP\SOLID\Infra\View\IViewFactory;
+use KP\SOLID\UseCase\ConfigurationException;
+use KP\SOLID\UseCase\LoggerException;
 
 class App {
     private $serviceContainerBuilder;
@@ -32,6 +35,13 @@ class App {
 
             $view->display();
         } catch(Exception $e){
+            if($e instanceof LoggerException || $e instanceof ConfigurationException || $e instanceof ServiceContainerException){
+                $logger = new FileLogger();
+            }else{
+                $logger = $serviceContainer->getLogger();
+            }
+            $logger->error($e->getMessage());
+            $logger->error("Stack trace:\n" . $e->getTraceAsString());
             $exceptionViewModel = new ExceptionViewModel($e);
             $exceptionView = $this->viewFactory->create($exceptionViewModel);
             $exceptionView->display();

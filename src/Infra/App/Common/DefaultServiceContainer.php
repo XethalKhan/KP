@@ -12,7 +12,7 @@ use KP\SOLID\UseCase\IMailValidator;
 use KP\SOLID\UseCase\IRepositoryFactory;
 use KP\SOLID\UseCase\ISession;
 use ReflectionClass;
-use RuntimeException;
+use Throwable;
 
 class DefaultServiceContainer extends BaseServiceContainer {
 
@@ -58,28 +58,56 @@ class DefaultServiceContainer extends BaseServiceContainer {
         if($parameterType == 'KP\SOLID\UseCase\IMailValidator'){
             return $this->getMailValidator();
         }
+
+        throw new ServiceContainerException($this, "Unsupported parameter {$parameterType} in service container " . __CLASS__);
     }
 
     protected function createPresenter(string $context) : BasePresenter{
         if(!isset($this->executionContextMapping[$context]['PRESENTER'])){
-            throw new RuntimeException("Presenter not loaded for domain {$context}");
+            throw new ServiceContainerException($this, "Presenter not loaded for domain {$context}");
         }
 
-        $reflectionClass = new ReflectionClass($this->executionContextMapping[$context]['PRESENTER']);
-        return $reflectionClass->newInstance();
+        try{
+            $reflectionClass = new ReflectionClass($this->executionContextMapping[$context]['PRESENTER']);
+        } catch (Throwable $e){
+            throw new ServiceContainerException($this, "Class " . $this->executionContextMapping[$context]['PRESENTER'] . " not defined", $e->getCode(), $e);
+        }
+
+        try{
+            $presenter = $reflectionClass->newInstance();
+        } catch (Throwable $e){
+            throw new ServiceContainerException($this, "Class " . $this->executionContextMapping[$context]['PRESENTER'] . " not instantiated", $e->getCode(), $e);
+        }
+
+        return $presenter;
     }
 
     protected function createUseCaseInteractor(string $context, BasePresenter $presenter) : BaseUseCaseInteractor {
         if(!isset($this->executionContextMapping[$context]['USECASEINTERACTOR'])){
-            throw new RuntimeException("Use case interactor not loaded for domain {$context}");
+            throw new ServiceContainerException($this, "Use case interactor not loaded for domain {$context}");
         }
 
-        $reflectionClass = new ReflectionClass($this->executionContextMapping[$context]['USECASEINTERACTOR']);
-        $constructorParametersDefinition = $reflectionClass->getConstructor()->getParameters();
+        try{
+            $reflectionClass = new ReflectionClass($this->executionContextMapping[$context]['USECASEINTERACTOR']);
+        } catch (Throwable $e){
+            throw new ServiceContainerException($this, "Class " . $this->executionContextMapping[$context]['USECASEINTERACTOR'] . " not defined", $e->getCode(), $e);
+        }
+
+        $reflectionConstructor = $reflectionClass->getConstructor();
+
+        if($reflectionConstructor === null){
+            throw new ServiceContainerException($this, "Constructor is not defined on use case interactor " . $this->executionContextMapping[$context]['USECASEINTERACTOR']);
+        }
+
+        $constructorParametersDefinition = $reflectionConstructor->getParameters();
         $constructorParameters = array();
 
         foreach($constructorParametersDefinition as $parameterDefinition){
-            if($parameterDefinition->getType()->getName() == 'KP\SOLID\UseCase\IOutputGateway'){
+            $parameterType = $parameterDefinition->getType();
+            if($parameterType === null){
+                throw new ServiceContainerException($this, "Parameter type is not defined in use case interactor " . $this->executionContextMapping[$context]['USECASEINTERACTOR']);
+            }
+            if($parameterType->getName() == 'KP\SOLID\UseCase\IOutputGateway'){
                 $constructorParameters[] = $presenter;
                 continue;
             }
@@ -87,20 +115,46 @@ class DefaultServiceContainer extends BaseServiceContainer {
             $constructorParameters[] = $this->loadServiceFromConstructorParameter($parameterDefinition);
         }
 
-        return $reflectionClass->newInstanceArgs($constructorParameters);
+        try{
+            $useCaseInteractor = $reflectionClass->newInstanceArgs($constructorParameters);
+        } catch (Throwable $e){
+            throw new ServiceContainerException($this, "Class " . $this->executionContextMapping[$context]['USECASEINTERACTOR'] . " not instantiated", $e->getCode(), $e);
+        }
+
+        if($useCaseInteractor === null){
+            throw new ServiceContainerException($this, "Reflection unable to instantiate class " . $this->executionContextMapping[$context]['USECASEINTERACTOR']);
+        }
+
+        return $useCaseInteractor;
     }
 
     protected function createController(string $context, BaseUseCaseInteractor $useCaseInteractor) : BaseController {
         if(!isset($this->executionContextMapping[$context]['CONTROLLER'])){
-            throw new RuntimeException("Controller not loaded for domain {$context}");
+            throw new ServiceContainerException($this, "Controller not loaded for domain {$context}");
         }
 
-        $reflectionClass = new ReflectionClass($this->executionContextMapping[$context]['CONTROLLER']);
+        try{
+            $reflectionClass = new ReflectionClass($this->executionContextMapping[$context]['CONTROLLER']);
+        } catch (Throwable $e){
+            throw new ServiceContainerException($this, "Class " . $this->executionContextMapping[$context]['CONTROLLER'] . " not defined", $e->getCode(), $e);
+        }
+
+        $reflectionConstructor = $reflectionClass->getConstructor();
+
+        if($reflectionConstructor === null){
+            throw new ServiceContainerException($this, "Constructor is not defined on controller " . $this->executionContextMapping[$context]['CONTROLLER']);
+        }
+
         $constructorParametersDefinition = $reflectionClass->getConstructor()->getParameters();
         $constructorParameters = array();
 
         foreach($constructorParametersDefinition as $parameterDefinition){
-            if($parameterDefinition->getType()->getName() == 'KP\SOLID\UseCase\IInputGateway'){
+            $parameterType = $parameterDefinition->getType();
+            if($parameterType === null){
+                throw new ServiceContainerException($this, "Parameter type is not defined in constructor " . $this->executionContextMapping[$context]['CONTROLLER']);
+            }
+
+            if($parameterType->getName() == 'KP\SOLID\UseCase\IInputGateway'){
                 $constructorParameters[] = $useCaseInteractor;
                 continue;
             }
@@ -108,6 +162,16 @@ class DefaultServiceContainer extends BaseServiceContainer {
             $constructorParameters[] = $this->loadServiceFromConstructorParameter($parameterDefinition);
         }
 
-        return $reflectionClass->newInstanceArgs($constructorParameters);
+        try{
+            $controller = $reflectionClass->newInstanceArgs($constructorParameters);
+        } catch (Throwable $e){
+            throw new ServiceContainerException($this, "Class " . $this->executionContextMapping[$context]['CONTROLLER'] . " not instantiated", $e->getCode(), $e);
+        }
+
+        if($controller === null){
+            throw new ServiceContainerException($this, "Reflection unable to instantiate class " . $this->executionContextMapping[$context]['CONTROLLER']);
+        }
+
+        return $controller;
     }
 }
