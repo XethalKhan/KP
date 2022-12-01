@@ -2,6 +2,7 @@
 
 namespace KP\SOLID\Infra\App;
 
+use ErrorException;
 use Exception;
 use KP\SOLID\Adapter\ExceptionViewModel;
 use KP\SOLID\Infra\Logger\FileLogger;
@@ -35,7 +36,7 @@ class App {
 
             $view->display();
         } catch(Exception $e){
-            if($e instanceof LoggerException || $e instanceof ConfigurationException || $e instanceof ServiceContainerException){
+            if($e instanceof LoggerException || $e instanceof ConfigurationException || $e instanceof ServiceContainerException || $e instanceof ErrorException){
                 $logger = new FileLogger();
             }else{
                 $logger = $serviceContainer->getLogger();

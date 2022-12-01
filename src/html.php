@@ -2,15 +2,25 @@
 
 namespace KP\SOLID;
 
+use KP\SOLID\Adapter\ExceptionViewModel;
 use KP\SOLID\Infra\App\App;
 use KP\SOLID\Infra\App\PageServiceContainerBuilder;
 use KP\SOLID\Infra\App\HttpHtmlRequestActionLoader;
+use KP\SOLID\Infra\Logger\FileLogger;
 use KP\SOLID\Infra\View\Page\PageViewFactory;
+use Throwable;
 
-require_once 'src/Domain/index.php';
-require_once 'src/UseCase/index.php';
-require_once 'src/Adapter/index.php';
-require_once 'src/Infra/index.php';
+function html_exception_handler(Throwable $exception) {
+    $logger = new FileLogger();
+    $viewFactory = new PageViewFactory();
+    $logger->error($exception->getMessage());
+    $logger->error("Stack trace:\n" . $exception->getTraceAsString());
+    $exceptionViewModel = new ExceptionViewModel($exception);
+    $exceptionView = $viewFactory->create($exceptionViewModel);
+    $exceptionView->display();
+}
+  
+set_exception_handler('KP\SOLID\html_exception_handler');
 
 $serviceContainerBuilder = new PageServiceContainerBuilder();
 $actionLoader = new HttpHtmlRequestActionLoader();

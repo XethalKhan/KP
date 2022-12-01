@@ -21,7 +21,7 @@ abstract class BaseFileConfiguration extends BaseConfiguration {
     }
 
     public function has($parameter) : bool {
-        return $this->configurationMap[$parameter] != NULL;
+        return isset($this->configurationMap[$parameter]);
     }
 
 }

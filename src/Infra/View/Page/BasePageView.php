@@ -15,9 +15,11 @@ abstract class BasePageView extends BaseView{
     }
 
     public function display() : void {
+        parent::display();
         header('Content-Type: text/html');
 
         echo "<html><head>";
+        echo "<link rel=\"shortcut icon\" href=\"#\" />";
         echo "<title>{$this->title}</title>";
         echo "<!-- Latest compiled and minified CSS -->";
         echo "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\">";

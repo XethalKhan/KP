@@ -63,8 +63,11 @@ class UserMysqliRepository extends BaseMysqliRepository {
             throw new MysqliStorageException($this->host, $this->port, $this->database, $this, "Prepared statement not created for query {$sql}. {$connection->error}", $connection->errno);
         }
 
-        if(!$preparedStatement->bind_param("sss", $command->getEmail(), $command->getPassword(), $command->getPosted())){
-            throw new MysqliStorageException($this->host, $this->port, $this->database, $this, "Parameters not bound to prepared statement for query {$sql} and parameters email = {$command->getEmail()} password = {$command->getPassword()} posted = {$command->getPosted()}. {$preparedStatement->error}", $preparedStatement->errno);
+        $email = $command->getEmail();
+        $password = $command->getPassword();
+        $posted = $command->getPosted();
+        if(!$preparedStatement->bind_param("sss", $email, $password, $posted)){
+            throw new MysqliStorageException($this->host, $this->port, $this->database, $this, "Parameters not bound to prepared statement for query {$sql} and parameters email = {$email} password = {$password} posted = {$posted}. {$preparedStatement->error}", $preparedStatement->errno);
         }
 
         if($preparedStatement->execute() === false){

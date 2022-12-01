@@ -9,8 +9,8 @@ use KP\SOLID\Adapter\BaseViewModel;
 
 class ExecutionContext {
 
-    private $controller;
-    private $presenter;
+    protected $controller;
+    protected $presenter;
 
     public function __construct(BaseController $controller, BasePresenter $presenter) {
         $this->controller = $controller;

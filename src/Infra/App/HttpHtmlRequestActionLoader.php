@@ -32,6 +32,8 @@ class HttpHtmlRequestActionLoader extends BaseActionLoader{
             return new SignUpAction($_POST['email'], $_POST['password'], $_POST['password_repeat']);
         }
 
+        var_dump("NEMA ODGOVARAJUCE AKCIJE");
+
         throw new HttpActionLoaderException($this, $_SERVER["REQUEST_METHOD"], $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], file_get_contents('php://input'), 'Unsupported action');
     }
 }
